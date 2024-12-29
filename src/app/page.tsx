@@ -1,25 +1,11 @@
-type Product =  {
-  productId: number,
-  productName: string,
-  unitPrice: number,
-}
+import GlobalSearchBoxComponent from "@/components/globalSearchBox/globalSearchBox.component";
 
-export default async  function Home() {
-  const res = await fetch("https://apitester.ir/api/Products", {
-    cache: "no-store",
-  });
+import styles from "./page.module.css";
 
-  const products: Product[] = await res.json();
-
+export default function Home() {
   return (
-    <main>
-      <h1>سلام، دنیا!</h1>
-
-      <ul>
-        {products.map((product) => (
-            <li key={product.productId}>{product.productName} - {product.unitPrice}</li>
-        ))}
-      </ul>
-    </main>
+    <div className={styles.home}>
+      <GlobalSearchBoxComponent />
+    </div>
   );
 }
