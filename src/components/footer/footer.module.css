@@ -13,7 +13,7 @@
     }
 
     > p {
-      color: var(--color-middle-blue);
+      color: var(--color-primary);
       font-weight: 700;
     }
   }
@@ -22,7 +22,7 @@
     inline-size: 100%;
     block-size: 0.15rem;
 
-    background-color: var(--color-dark-blue);
+    background-color: var(--color-primary);
   }
 
   .row {
@@ -40,8 +40,14 @@
       gap: 1rem;
 
       svg {
+        color: var(--color-primary);
         font-size: var(--fz-600);
-        color: var(--color-middle-blue);
+
+        transition: color var(--animation-duration-fast) ease-in-out;
+
+        &:hover {
+          color: var(--color-primary-darker);
+        }
       }
     }
   }

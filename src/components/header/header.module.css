@@ -1,51 +1,46 @@
 .header {
   padding-block: 1rem;
 
-  > .box {
+  .box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
 
-    background-color: var(--color-light-blue);
+    background-color: var(--color-primary-fade);
 
     padding: 1rem;
 
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-medium);
 
-    nav {
+    > nav {
       > ul {
         display: flex;
         gap: 2rem;
 
         > li {
-          a {
+          > a {
             &.active {
-              color: var(--color-middle-blue);
+              color: var(--color-primary);
             }
           }
         }
       }
     }
 
-    .booking-btn {
-      background-color: transparent;
-      color: var(--color-middle-blue);
-
-      padding: 0.5rem 1rem;
-
+    .booking {
       border: 1px solid currentcolor;
-      border-radius: var(--border-radius);
 
+      color: var(--color-primary);
       font-weight: 700;
 
-      cursor: pointer;
+      transition: var(--animation-duration-fast) ease-in-out;
+      transition-property: background-color, color;
 
       &:hover {
-        background-color: var(--color-middle-blue);
-        color: var(--color-secondary);
+        background-color: var(--color-primary);
 
-        transition: var(--animation-duration-fast);
+        color: var(--color-primary-opposite);
       }
     }
   }

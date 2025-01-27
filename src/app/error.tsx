@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+import ButtonComponent from "@/components/button/button.component";
+
 import errorImage from "@/assets/illustrations/error.webp";
 
 import styles from "./error.module.css";
@@ -12,7 +14,7 @@ type Props = {
 
 export default function Error({ reset }: Props) {
   return (
-    <div className={styles["error"]}>
+    <div className={styles.error}>
       <div className={styles.writings}>
         <div className={styles["status-code"]}>بدبخت شدیم!</div>
         <h1>یک خطای غیرمنتظره رخ داده است.</h1>
@@ -22,7 +24,7 @@ export default function Error({ reset }: Props) {
         <Image src={errorImage} alt="" />
       </div>
       <div className={styles.actions}>
-        <button onClick={reset}>تلاش مجدد</button>
+        <ButtonComponent onClick={reset}>تلاش مجدد</ButtonComponent>
       </div>
     </div>
   );

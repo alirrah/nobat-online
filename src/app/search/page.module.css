@@ -1,0 +1,28 @@
+.search-page {
+  display: grid;
+  justify-items: center;
+
+  .results {
+    display: grid;
+    grid-template: "filters ordering" "filters results";
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+
+    inline-size: 100%;
+
+    padding-block: 3rem;
+
+    .filters {
+      grid-area: filters;
+    }
+
+    .ordering {
+      grid-area: ordering;
+    }
+
+    .results-list {
+      grid-area: results;
+    }
+  }
+}
