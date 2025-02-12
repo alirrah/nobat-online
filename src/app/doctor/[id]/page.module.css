@@ -1,0 +1,23 @@
+.doctor-id-page {
+  display: grid;
+  grid-template: "content aside";
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+
+  padding-block-end: 2rem;
+
+  > section,
+  > aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  > section {
+    grid-area: content;
+  }
+
+  > aside {
+    grid-area: aside;
+  }
+}

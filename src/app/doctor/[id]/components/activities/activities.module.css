@@ -1,0 +1,19 @@
+.activities {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .activity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    background-color: var(--color-primary-opposite);
+
+    border: 1px solid var(--color-secondary);
+
+    > svg {
+      font-size: 1.25em;
+    }
+  }
+}

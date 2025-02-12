@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 import ButtonComponent from "@/components/button/button.component";
 
-import { MenuItemType } from "@/types/menuItem.type";
+import { MenuItemType } from "@/types/menu-item.type";
 
 import styles from "./header.module.css";
 
@@ -20,7 +20,7 @@ export default function HeaderComponent({ menu }: { menu: MenuItemType[] }) {
         <nav>
           <ul>
             {menu.map((link) => (
-              <li key={link.key}>
+              <li key={link.id}>
                 <Link
                   href={link.link}
                   className={clsx(pathname === link.link && styles.active)}

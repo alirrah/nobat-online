@@ -30,7 +30,7 @@ export default function ResultsComponent({ className }: Props) {
     <ul className={clsx(styles.results, className)}>
       {filteredDoctors.map((doctor) => (
         <li key={doctor.id}>
-          <CardComponent className={styles.box}>
+          <CardComponent showShadow className={styles.box}>
             <div className={styles["doctor-card"]}>
               <div className={styles.image}>
                 <Image
@@ -50,7 +50,7 @@ export default function ResultsComponent({ className }: Props) {
                 </b>
                 <p className={styles.category}>{doctor.expertise}</p>
                 <p className={styles.address}>
-                  <MingcuteLocationLine /> {doctor.address}
+                  <MingcuteLocationLine /> {doctor.addresses?.[0].location}
                 </p>
                 <p className={styles.time}>
                   اولین نوبت: <b>{doctor.firstAvailableAppointment}</b>
@@ -58,10 +58,10 @@ export default function ResultsComponent({ className }: Props) {
               </div>
               <div className={styles.star}>
                 <MingcuteStarFill />
-                <p>{Math.round(doctor.averageRating * 100) / 100}</p>
+                <p>{Math.round(doctor.averageRating * 10) / 10}</p>
               </div>
             </div>
-            <Link href="#">دریافت نوبت</Link>
+            <Link href={`/doctor/${doctor.id}`}>دریافت نوبت</Link>
           </CardComponent>
         </li>
       ))}

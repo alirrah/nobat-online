@@ -72,7 +72,9 @@ function doesDoctorInclude(doctor: DoctorType, query?: string): boolean {
   }
 
   return doesSomeInclude(
-    [doctor.name, doctor.expertise, doctor.address],
+    [doctor.name, doctor.expertise].concat(
+      doctor.addresses.map((address) => address.location),
+    ),
     query,
   );
 }

@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    > li {
+      .button {
+        inline-size: 100%;
+
+        padding-block: 0.25rem;
+
+        text-align: start;
+
+        transition: var(--animation-duration-fast) ease-in-out;
+        transition-property: background-color, color;
+
+        &.active {
+          background-color: var(--color-primary);
+
+          color: var(--color-primary-opposite);
+        }
+
+        &:hover {
+          background-color: var(--color-primary-fade);
+
+          color: inherit;
+        }
+      }
+    }
+  }
+}
