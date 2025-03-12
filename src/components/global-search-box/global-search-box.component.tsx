@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, ReactNode, useContext, useEffect, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 
@@ -14,7 +14,7 @@ import { OrderContext } from "@/app/search/providers/order/order.provider";
 
 import styles from "./global-search-box.module.css";
 
-export default function GlobalSearchBoxComponent() {
+export default function GlobalSearchBoxComponent(): ReactNode {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -92,7 +92,12 @@ export default function GlobalSearchBoxComponent() {
       />
       <div className={styles.divider}></div>
       <div className={styles.suffix}>
-        <ButtonComponent className={styles.button}>
+        <ButtonComponent
+          variant="primary"
+          shape="inherit"
+          size="medium"
+          className={styles.button}
+        >
           <MingcuteLocationFill />
           همه شهرها
         </ButtonComponent>

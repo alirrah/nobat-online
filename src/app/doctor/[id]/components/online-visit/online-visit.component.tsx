@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import CardComponent from "@/components/card/card.component";
 import ButtonComponent from "@/components/button/button.component";
 
@@ -14,7 +16,7 @@ type Props = {
 export default function OnlineVisitComponent({
   doctorName,
   onlineVisitPrice,
-}: Props) {
+}: Props): ReactNode {
   if (!onlineVisitPrice) {
     return null;
   }
@@ -41,7 +43,12 @@ export default function OnlineVisitComponent({
           تا <b>3 روز</b> می‌توانید هر سوالی دارید از پزشک بپرسید
         </li>
       </ul>
-      <ButtonComponent size="small" className={styles.button}>
+      <ButtonComponent
+        variant="primary"
+        shape="solid"
+        size="medium"
+        className={styles.button}
+      >
         <p>شروع ویزیت با {doctorName}</p>
         <MingcuteArrowsLeftLine />
       </ButtonComponent>
