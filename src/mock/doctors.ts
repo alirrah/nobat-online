@@ -1,6 +1,7 @@
 import { ExpertiseEnum } from "@/enums/expertise.enum";
-import { DoctorType } from "@/types/doctor.type";
 import { GenderEnum } from "@/enums/gender.enum";
+
+import { DoctorType } from "@/types/doctor.type";
 
 export const doctors: DoctorType[] = [
   {

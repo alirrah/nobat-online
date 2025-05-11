@@ -4,13 +4,13 @@ import { FormEvent, ReactNode, useContext, useEffect, useState } from "react";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import ButtonComponent from "@/components/button/button.component";
-
-import MingcuteSearchFill from "@/icon/MingcuteSearchFill";
-import MingcuteLocationFill from "@/icon/MingcuteLocationFill";
-
 import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 import { OrderContext } from "@/app/search/providers/order/order.provider";
+
+import ButtonComponent from "@/components/button/button.component";
+
+import MingcuteLocationFill from "@/icons/MingcuteLocationFill";
+import MingcuteSearchFill from "@/icons/MingcuteSearchFill";
 
 import styles from "./global-search-box.module.css";
 

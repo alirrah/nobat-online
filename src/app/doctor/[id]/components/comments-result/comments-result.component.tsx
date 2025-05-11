@@ -2,9 +2,9 @@
 
 import { ReactNode, useContext } from "react";
 
-import MingcuteUserFill from "@/icon/MingcuteUserFill";
-
 import { CommentsContext } from "@/app/doctor/[id]/providers/comments/comments.provider";
+
+import MingcuteUserFill from "@/icons/MingcuteUserFill";
 
 import styles from "./comments-result.module.css";
 

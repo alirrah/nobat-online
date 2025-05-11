@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  createContext,
   Dispatch,
   PropsWithChildren,
   ReactNode,
+  createContext,
   useReducer,
 } from "react";
-
-import { OrderingEnum } from "@/enums/ordering.enum";
 
 import {
   OrderingAction,
   OrderingReducer,
 } from "@/app/search/reducers/order/order.reducer";
+
+import { OrderingEnum } from "@/enums/ordering.enum";
 
 type Value = {
   ordering: OrderingEnum;

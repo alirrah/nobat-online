@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-import CardComponent from "@/components/card/card.component";
 import ButtonComponent from "@/components/button/button.component";
+import CardComponent from "@/components/card/card.component";
 
-import MingcuteWalkFill from "@/icon/MingcuteWalkFill";
-import MingcuteArrowsLeftLine from "@/icon/MingcuteArrowsLeftLine";
+import MingcuteArrowsLeftLine from "@/icons/MingcuteArrowsLeftLine";
+import MingcuteWalkFill from "@/icons/MingcuteWalkFill";
 
 import styles from "./get-appointment.module.css";
 

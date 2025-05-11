@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-import CardComponent from "@/components/card/card.component";
 import ButtonComponent from "@/components/button/button.component";
+import CardComponent from "@/components/card/card.component";
 
-import MingcuteArrowsLeftLine from "@/icon/MingcuteArrowsLeftLine";
-import MingcuteWifiLine from "@/icon/MingcuteWifiLine";
+import MingcuteArrowsLeftLine from "@/icons/MingcuteArrowsLeftLine";
+import MingcuteWifiLine from "@/icons/MingcuteWifiLine";
 
 import styles from "./online-visit.module.css";
 

@@ -1,21 +1,21 @@
 "use client";
 
 import {
-  createContext,
   PropsWithChildren,
   ReactNode,
+  createContext,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 
-import { DoctorType } from "@/types/doctor.type";
+import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
+import { OrderContext } from "@/app/search/providers/order/order.provider";
 
 import { OrderingEnum } from "@/enums/ordering.enum";
 
-import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
-import { OrderContext } from "@/app/search/providers/order/order.provider";
+import { DoctorType } from "@/types/doctor.type";
 
 type ContextValue = {
   filteredDoctors: DoctorType[];
