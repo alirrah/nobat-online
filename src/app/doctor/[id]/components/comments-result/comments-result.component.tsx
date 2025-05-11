@@ -44,5 +44,5 @@ const options: Intl.DateTimeFormatOptions = {
 };
 
 function convertDateTime(inputDate: string) {
-  return new Date(inputDate).toLocaleDateString("fa-IR", options);
+  return new Date(inputDate).toLocaleDateString("fa-IR-u-nu-latn", options);
 }
