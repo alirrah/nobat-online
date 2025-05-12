@@ -2,8 +2,6 @@
 
 import { FormEvent, ReactNode, useEffect, useState } from "react";
 
-import Error from "next/error";
-
 import Loading from "@/app/loading";
 
 import ButtonComponent from "@/components/button/button.component";
