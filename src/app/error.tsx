@@ -4,9 +4,9 @@ import { ReactNode } from "react";
 
 import Image from "next/image";
 
-import ButtonComponent from "@/components/button/button.component";
-
 import errorImage from "@/assets/illustrations/error.webp";
+
+import ButtonComponent from "@/components/button/button.component";
 
 import styles from "./error.module.css";
 

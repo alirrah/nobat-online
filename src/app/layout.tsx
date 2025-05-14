@@ -3,16 +3,16 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 
-import HeaderComponent from "@/components/header/header.component";
 import FooterComponent from "@/components/footer/footer.component";
+import HeaderComponent from "@/components/header/header.component";
 import ToasterComponent from "@/components/toaster/toaster.component";
+
+import MingcuteInsFill from "@/icons/MingcuteInsFill";
+import MingcuteLinkedinFill from "@/icons/MingcuteLinkedinFill";
+import MingcuteTelegramFill from "@/icons/MingcuteTelegramFill";
 
 import { MenuItemType } from "@/types/menu-item.type";
 import { socialLinkType } from "@/types/social-link.type";
-
-import MingcuteTelegramFill from "@/icon/MingcuteTelegramFill";
-import MingcuteLinkedinFill from "@/icon/MingcuteLinkedinFill";
-import MingcuteInsFill from "@/icon/MingcuteInsFill";
 
 import "@/styles/typography.css";
 

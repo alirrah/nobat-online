@@ -1,19 +1,19 @@
 "use client";
 
 import {
-  createContext,
   Dispatch,
   PropsWithChildren,
   ReactNode,
+  createContext,
   useReducer,
 } from "react";
-
-import { FiltersType } from "@/types/filters.type";
 
 import {
   FiltersAction,
   filtersReducer,
 } from "@/app/search/reducers/filters/filters.reducer";
+
+import { FiltersType } from "@/types/filters.type";
 
 type Value = {
   filters: FiltersType;

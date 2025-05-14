@@ -2,11 +2,11 @@
 
 import { ReactNode, useContext } from "react";
 
-import { useDebounce } from "@/hooks/debounce";
+import { SearchContext } from "@/app/doctor/[id]/providers/search/search.provider";
 
 import { SearchOrderType } from "@/enums/search-ordering.enum";
 
-import { SearchContext } from "@/app/doctor/[id]/providers/search/search.provider";
+import { useDebounce } from "@/hooks/debounce";
 
 import styles from "./comments-title.module.css";
 

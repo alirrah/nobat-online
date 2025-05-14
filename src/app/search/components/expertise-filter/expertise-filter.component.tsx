@@ -4,12 +4,12 @@ import { ReactNode, useContext } from "react";
 
 import clsx from "clsx";
 
-import CardComponent from "@/components/card/card.component";
+import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
+
 import ButtonComponent from "@/components/button/button.component";
+import CardComponent from "@/components/card/card.component";
 
 import { ExpertiseEnum } from "@/enums/expertise.enum";
-
-import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 
 import styles from "./expertise-filter.module.css";
 

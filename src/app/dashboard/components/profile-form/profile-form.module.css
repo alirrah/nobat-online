@@ -1,0 +1,20 @@
+.profile-form {
+  display: grid;
+  gap: 2rem;
+
+  margin: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    button {
+      grid-column: 1 / -1;
+    }
+  }
+}

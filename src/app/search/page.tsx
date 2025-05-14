@@ -1,22 +1,21 @@
 import { ReactNode } from "react";
 
+import ResultsComponent from "@/app/search/components/results/results.component";
+import SidebarFiltersComponent from "@/app/search/components/sidebar-filters/sidebar-filters.component";
+import TopBarComponent from "@/app/search/components/top-bar/top-bar.component";
+import DoctorsProvider from "@/app/search/providers/doctors/doctors.provider";
+import FiltersProvider from "@/app/search/providers/filters/filters.provider";
+import OrderProvider from "@/app/search/providers/order/order.provider";
+
 import GlobalSearchBoxComponent from "@/components/global-search-box/global-search-box.component";
-
-import { doctors } from "@/mock/doctors";
-
-import { FiltersType } from "@/types/filters.type";
 
 import { ExpertiseEnum } from "@/enums/expertise.enum";
 import { GenderEnum } from "@/enums/gender.enum";
 import { OrderingEnum } from "@/enums/ordering.enum";
 
-import FiltersProvider from "@/app/search/providers/filters/filters.provider";
-import OrderProvider from "@/app/search/providers/order/order.provider";
-import DoctorsProvider from "@/app/search/providers/doctors/doctors.provider";
+import { doctors } from "@/mock/doctors";
 
-import SidebarFiltersComponent from "@/app/search/components/sidebar-filters/sidebar-filters.component";
-import TopBarComponent from "@/app/search/components/top-bar/top-bar.component";
-import ResultsComponent from "@/app/search/components/results/results.component";
+import { FiltersType } from "@/types/filters.type";
 
 import styles from "./page.module.css";
 
