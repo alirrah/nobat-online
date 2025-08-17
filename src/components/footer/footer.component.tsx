@@ -28,7 +28,11 @@ export default function FooterComponent({
         <ul>
           {socialMedia.map((socialItem) => (
             <li key={socialItem.id}>
-              <Link href={socialItem.link} target="_blank">
+              <Link
+                href={socialItem.link}
+                title={socialItem.title}
+                target="_blank"
+              >
                 {socialItem.icon}
               </Link>
             </li>
