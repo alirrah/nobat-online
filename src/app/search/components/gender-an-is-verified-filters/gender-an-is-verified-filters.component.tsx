@@ -2,13 +2,12 @@
 
 import { ReactNode, useContext } from "react";
 
+import ToggleComponent from "@/app/search/components/toggle/toggle.component";
+import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
+
 import CardComponent from "@/components/card/card.component";
 
 import { GenderEnum } from "@/enums/gender.enum";
-
-import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
-
-import ToggleComponent from "@/app/search/components/toggle/toggle.component";
 
 import styles from "./gender-an-is-verified-filters.module.css";
 

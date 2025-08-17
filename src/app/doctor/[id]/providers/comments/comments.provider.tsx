@@ -1,20 +1,20 @@
 "use client";
 
 import {
-  createContext,
   PropsWithChildren,
   ReactNode,
+  createContext,
   useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 
-import { CommentType } from "@/types/comment.type";
+import { SearchContext } from "@/app/doctor/[id]/providers/search/search.provider";
 
 import { SearchOrderType } from "@/enums/search-ordering.enum";
 
-import { SearchContext } from "@/app/doctor/[id]/providers/search/search.provider";
+import { CommentType } from "@/types/comment.type";
 
 type ContextValue = {
   filteredComments: CommentType[];

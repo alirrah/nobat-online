@@ -2,8 +2,8 @@ import { ReactNode, useMemo } from "react";
 
 import CardComponent from "@/components/card/card.component";
 
-import MingcuteMedalLine from "@/icon/MingcuteMedalLine";
-import MingcuteChatLine from "@/icon/MingcuteChatLine";
+import MingcuteChatLine from "@/icons/MingcuteChatLine";
+import MingcuteMedalLine from "@/icons/MingcuteMedalLine";
 
 import { DoctorType } from "@/types/doctor.type";
 

@@ -1,22 +1,22 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import { FormEvent, ReactNode, useRef, useState } from "react";
+
+import { useRouter } from "next/navigation";
 
 import ButtonComponent from "@/components/button/button.component";
 import InputComponent from "@/components/input/input.component";
 
-import MingcuteIdcardFill from "@/icon/MingcuteIdcardFill";
-import MingcuteUser3Fill from "@/icon/MingcuteUser3Fill";
-import MingcuteMailFill from "@/icon/MingcuteMailFill";
-import MingcuteLockFill from "@/icon/MingcuteLockFill";
-import MingcuteEye2Line from "@/icon/MingcuteEye2Line";
-import MingcuteEyeCloseLine from "@/icon/MingcuteEyeCloseLine";
+import { SignUpDto } from "@/dto/auth.dto";
+
+import MingcuteEye2Line from "@/icons/MingcuteEye2Line";
+import MingcuteEyeCloseLine from "@/icons/MingcuteEyeCloseLine";
+import MingcuteIdcardFill from "@/icons/MingcuteIdcardFill";
+import MingcuteLockFill from "@/icons/MingcuteLockFill";
+import MingcuteMailFill from "@/icons/MingcuteMailFill";
+import MingcuteUser3Fill from "@/icons/MingcuteUser3Fill";
 
 import { fetchWithToast } from "@/utils/fetch.util";
-
-import { SignUpDto } from "@/dto/auth.dto";
 
 import styles from "@/app/auth/styles/auth-form.module.css";
 

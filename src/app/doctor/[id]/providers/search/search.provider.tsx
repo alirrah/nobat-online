@@ -1,16 +1,16 @@
 "use client";
 
 import {
-  createContext,
   PropsWithChildren,
   ReactNode,
+  createContext,
   useCallback,
   useState,
 } from "react";
 
-import { SearchType } from "@/types/search.type";
-
 import { SearchOrderType } from "@/enums/search-ordering.enum";
+
+import { SearchType } from "@/types/search.type";
 
 type Value = {
   search: SearchType;

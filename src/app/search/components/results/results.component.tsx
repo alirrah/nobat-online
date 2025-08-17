@@ -2,20 +2,20 @@
 
 import { ReactNode, useContext } from "react";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import clsx from "clsx";
 
-import CardComponent from "@/components/card/card.component";
+import { DoctorsContext } from "@/app/search/providers/doctors/doctors.provider";
 
-import MingcuteLocationLine from "@/icon/MingcuteLocationLine";
-import MingcuteStarFill from "@/icon/MingcuteStarFill";
-import MingcuteCheckFill from "@/icon/MingcuteCheckFill";
+import CardComponent from "@/components/card/card.component";
 
 import { GenderEnum } from "@/enums/gender.enum";
 
-import { DoctorsContext } from "@/app/search/providers/doctors/doctors.provider";
+import MingcuteCheckFill from "@/icons/MingcuteCheckFill";
+import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
+import MingcuteStarFill from "@/icons/MingcuteStarFill";
 
 import styles from "./results.module.css";
 

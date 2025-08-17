@@ -49,7 +49,7 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
       );
     }
 
-    await setAuthCookie();
+    await setAuthCookie(foundUser.id);
 
     return NextResponse.json({ data: null }, { status: 200 });
   });

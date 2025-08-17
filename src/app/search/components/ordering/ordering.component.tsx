@@ -2,11 +2,11 @@
 
 import { ReactNode, useContext } from "react";
 
+import { OrderContext } from "@/app/search/providers/order/order.provider";
+
 import CardComponent from "@/components/card/card.component";
 
 import { OrderingEnum } from "@/enums/ordering.enum";
-
-import { OrderContext } from "@/app/search/providers/order/order.provider";
 
 import styles from "./ordering.module.css";
 

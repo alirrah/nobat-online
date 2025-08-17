@@ -4,10 +4,10 @@ import { ReactNode } from "react";
 
 import Image from "next/image";
 
-import CardComponent from "@/components/card/card.component";
 import ButtonComponent from "@/components/button/button.component";
+import CardComponent from "@/components/card/card.component";
 
-import MingcuteShareLine from "@/icon/MingcuteShareLine";
+import MingcuteShareLine from "@/icons/MingcuteShareLine";
 
 import { DoctorType } from "@/types/doctor.type";
 

@@ -3,9 +3,9 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { socialLinkType } from "@/types/social-link.type";
-
 import Logo from "@/assets/logo/logo.svg";
+
+import { socialLinkType } from "@/types/social-link.type";
 
 import styles from "./footer.module.css";
 

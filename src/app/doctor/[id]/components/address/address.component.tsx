@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 
 import CardComponent from "@/components/card/card.component";
 
-import { AddressType } from "@/types/address.type";
+import MingcutePhoneLine from "@/icons/MingcutePhoneLine";
 
-import MingcutePhoneLine from "@/icon/MingcutePhoneLine";
+import { AddressType } from "@/types/address.type";
 
 import styles from "./address.module.css";
 

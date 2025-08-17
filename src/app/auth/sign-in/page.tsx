@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 
 import Link from "next/link";
 
-import CardComponent from "@/components/card/card.component";
-
 import SignInFormComponent from "@/app/auth/components/sign-in-form/sign-in-form.component";
+
+import CardComponent from "@/components/card/card.component";
 
 import styles from "@/app/auth/styles/auth-page.module.css";
 
