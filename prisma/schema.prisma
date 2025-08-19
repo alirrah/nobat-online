@@ -20,3 +20,42 @@ model User {
   email     String @unique
   password  String
 }
+
+model Gender {
+  id      Int     @id @default(autoincrement())
+  label   String  @unique
+  doctors Doctor[]
+}
+
+model Expertise {
+  id      Int     @id @default(autoincrement())
+  label   String  @unique
+  doctors Doctor[]
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  title     String
+  location  String
+  phones    Json
+  doctorId  Int
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+}
+
+model Doctor {
+  id                         Int        @id @default(autoincrement())
+  genderId                   Int
+  gender                     Gender     @relation(fields: [genderId], references: [id])
+  name                       String
+  image                      String
+  expertiseId                Int
+  expertise                  Expertise  @relation(fields: [expertiseId], references: [id])
+  medicalSystemNumber        Int        @unique
+  isVerified                 Boolean
+  createdAt                  DateTime   @default(now())
+  activeConsultNumber        Int?
+  firstAvailableAppointment  DateTime
+  aboutMe                    String?
+  onlineVisitPrice           Int?
+  addresses                  Address[]
+}
