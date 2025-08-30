@@ -17,6 +17,8 @@ import MingcuteCheckFill from "@/icons/MingcuteCheckFill";
 import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
 import MingcuteStarFill from "@/icons/MingcuteStarFill";
 
+import { convertDateTime } from "@/utils/data.util";
+
 import styles from "./results.module.css";
 
 type Props = {
@@ -24,11 +26,11 @@ type Props = {
 };
 
 export default function ResultsComponent({ className }: Props): ReactNode {
-  const { filteredDoctors } = useContext(DoctorsContext);
+  const { doctors } = useContext(DoctorsContext);
 
   return (
     <ul className={clsx(styles.results, className)}>
-      {filteredDoctors.map((doctor) => (
+      {doctors.map((doctor) => (
         <li key={doctor.id}>
           <CardComponent showShadow className={styles.box}>
             <div className={styles["doctor-card"]}>
@@ -53,7 +55,10 @@ export default function ResultsComponent({ className }: Props): ReactNode {
                   <MingcuteLocationLine /> {doctor.addresses?.[0].location}
                 </p>
                 <p className={styles.time}>
-                  اولین نوبت: <b>{doctor.firstAvailableAppointment}</b>
+                  اولین نوبت:
+                  <b>
+                    {convertDateTime(`${doctor.firstAvailableAppointment}`)}
+                  </b>
                 </p>
               </div>
               <div className={styles.star}>
