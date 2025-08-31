@@ -4,7 +4,6 @@ import {
   PropsWithChildren,
   ReactNode,
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -13,85 +12,60 @@ import {
 import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 import { OrderContext } from "@/app/search/providers/order/order.provider";
 
-import { OrderingEnum } from "@/enums/ordering.enum";
-
 import { DoctorType } from "@/types/doctor.type";
 
+import { fetchWithToast } from "@/utils/fetch.util";
+
 type ContextValue = {
-  filteredDoctors: DoctorType[];
+  doctors: DoctorType[];
 };
 
 export const DoctorsContext = createContext<ContextValue>({
-  filteredDoctors: [],
+  doctors: [],
 });
 
-type Props = PropsWithChildren & {
-  items: DoctorType[];
-};
+type Props = PropsWithChildren;
 
-export default function DoctorsProvider({ children, items }: Props): ReactNode {
+export default function DoctorsProvider({ children }: Props): ReactNode {
   const { filters } = useContext(FiltersContext);
   const { ordering } = useContext(OrderContext);
 
-  const [filteredDoctors, setFilteredDoctors] = useState<DoctorType[]>([]);
-
-  const isVisible = useCallback(
-    (doctor: DoctorType): boolean => {
-      return (
-        doesDoctorInclude(doctor, filters.query) &&
-        doesInclude(doctor.expertise, filters.expertise) &&
-        doesInclude(doctor.gender, filters.gender) &&
-        ((doctor.isVerified && !!filters.isVerified) || !filters.isVerified)
-      );
-    },
-    [filters],
-  );
+  const [doctors, setDoctors] = useState<DoctorType[]>([]);
 
   useEffect(() => {
-    const filteredDoctors = items.filter(isVisible);
+    const getDoctors = async () => {
+      const orderingParam = ordering ? String(ordering) : "";
 
-    filteredDoctors.sort((firstDoctor, secondDoctor) => {
-      if (ordering === OrderingEnum.RATE) {
-        return secondDoctor.averageRating - firstDoctor.averageRating;
+      const formattedFilters: Record<string, string> = Object.keys(
+        filters,
+      ).reduce(
+        (acc, key) => {
+          const value = filters[key as keyof typeof filters];
+          acc[key] = value ? String(value) : "";
+          return acc;
+        },
+        {} as Record<string, string>,
+      );
+
+      const params = new URLSearchParams({
+        order: orderingParam,
+        ...formattedFilters,
+      });
+
+      const result = await fetchWithToast<DoctorType[]>(
+        `/api/doctor?${params.toString()}`,
+      );
+
+      if (result.data) {
+        setDoctors(result.data);
       }
-      return firstDoctor.name.localeCompare(secondDoctor.name);
-    });
-
-    setFilteredDoctors(filteredDoctors);
-  }, [filters, isVisible, items, ordering]);
+    };
+    getDoctors().then();
+  }, [filters, ordering]);
 
   return (
-    <DoctorsContext.Provider value={{ filteredDoctors }}>
+    <DoctorsContext.Provider value={{ doctors }}>
       {children}
     </DoctorsContext.Provider>
   );
-}
-
-function doesDoctorInclude(doctor: DoctorType, query?: string): boolean {
-  if (!query) {
-    return true;
-  }
-
-  return doesSomeInclude(
-    [doctor.name, doctor.expertise].concat(
-      doctor.addresses.map((address) => address.location),
-    ),
-    query,
-  );
-}
-
-function doesSomeInclude(items: string[], query?: string): boolean {
-  if (!query) {
-    return true;
-  }
-
-  return items.some((item) => doesInclude(item, query));
-}
-
-function doesInclude(item: string, query?: string): boolean {
-  if (!query) {
-    return true;
-  }
-
-  return item.toLowerCase().includes(query.toLowerCase());
 }

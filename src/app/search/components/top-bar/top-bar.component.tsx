@@ -14,12 +14,12 @@ type Props = {
 };
 
 export default function TopBarComponent({ className }: Props): ReactNode {
-  const { filteredDoctors } = useContext(DoctorsContext);
+  const { doctors } = useContext(DoctorsContext);
 
   return (
     <div className={clsx(styles["top-bar"], className)}>
       <OrderingComponent />
-      <p>{filteredDoctors.length.toLocaleString()} نتیجه</p>
+      <p>{doctors.length.toLocaleString()} نتیجه</p>
     </div>
   );
 }

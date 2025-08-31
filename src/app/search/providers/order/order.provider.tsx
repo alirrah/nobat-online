@@ -21,7 +21,7 @@ type Value = {
 };
 
 export const OrderContext = createContext<Value>({
-  ordering: OrderingEnum.ALPHABETICALLY,
+  ordering: OrderingEnum.DEFAULT,
   dispatchOrder: () => {},
 });
 

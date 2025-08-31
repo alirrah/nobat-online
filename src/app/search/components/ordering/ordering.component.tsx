@@ -26,8 +26,8 @@ export default function OrderingComponent(): ReactNode {
           })
         }
       >
+        <option value={OrderingEnum.DEFAULT}>پیش فرض</option>
         <option value={OrderingEnum.ALPHABETICALLY}>حروف الفبا</option>
-        <option value={OrderingEnum.RATE}>محبوب ترین</option>
       </select>
     </CardComponent>
   );
