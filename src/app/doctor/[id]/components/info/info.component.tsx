@@ -50,7 +50,7 @@ export default function InfoComponent({ doctor }: Props): ReactNode {
         </div>
       </CardComponent>
       <div className={styles.detail}>
-        <p className={styles.expertise}>{doctor.expertise}</p>
+        <p className={styles.expertise}>{doctor.expertise.label}</p>
         <p className={styles.rate}>
           <span>{Math.floor(doctor.averageRating * 100) / 100} از 5</span> رضایت
           ({doctor.totalPeopleRate} نفر)

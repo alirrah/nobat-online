@@ -10,7 +10,7 @@ import styles from "./online-visit.module.css";
 
 type Props = {
   doctorName: string;
-  onlineVisitPrice?: number;
+  onlineVisitPrice: number | null;
 };
 
 export default function OnlineVisitComponent({

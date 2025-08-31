@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { ReactNode } from "react";
 
 import CardComponent from "@/components/card/card.component";
 
@@ -7,6 +7,8 @@ import MingcuteMedalLine from "@/icons/MingcuteMedalLine";
 
 import { DoctorType } from "@/types/doctor.type";
 
+import { convertDate } from "@/utils/date-time.util";
+
 import styles from "./activities.module.css";
 
 type Props = {
@@ -14,16 +16,7 @@ type Props = {
 };
 
 export default function ActivitiesComponent({ doctor }: Props): ReactNode {
-  const monthActivity = doctor.activity.month || 0;
-  const yearActivity = doctor.activity.year || 0;
   const activeConsultNumber = doctor.activeConsultNumber || 0;
-
-  const displayTime = useMemo(() => {
-    let result = yearActivity !== 0 ? " " + yearActivity + " سال " : "";
-    result += yearActivity !== 0 && monthActivity !== 0 ? "و " : "";
-    result += monthActivity !== 0 ? monthActivity + " ماه " : "";
-    return result;
-  }, [monthActivity, yearActivity]);
 
   return (
     <CardComponent
@@ -34,16 +27,8 @@ export default function ActivitiesComponent({ doctor }: Props): ReactNode {
       <CardComponent className={styles.activity}>
         <MingcuteMedalLine />
         <p>
-          نوبت آنلاین{" "}
-          {yearActivity === 0 && monthActivity === 0 ? (
-            "به تازگی "
-          ) : (
-            <>
-              بیش از
-              <b> {displayTime}</b>
-            </>
-          )}
-          افتخار میزبانی از صفحه اختصاصی {doctor.name} را داشته است.
+          نوبت آنلاین از تاریخ {convertDate(`${doctor.createdAt}`)} افتخار
+          میزبانی از صفحه اختصاصی {doctor.name} را داشته است.
         </p>
       </CardComponent>
       {activeConsultNumber !== 0 && (

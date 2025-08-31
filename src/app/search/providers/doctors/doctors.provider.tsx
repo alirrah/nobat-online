@@ -12,12 +12,12 @@ import {
 import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 import { OrderContext } from "@/app/search/providers/order/order.provider";
 
-import { DoctorType } from "@/types/doctor.type";
+import { CompactedDoctorType } from "@/types/compacted-doctor.type";
 
 import { fetchWithToast } from "@/utils/fetch.util";
 
 type ContextValue = {
-  doctors: DoctorType[];
+  doctors: CompactedDoctorType[];
 };
 
 export const DoctorsContext = createContext<ContextValue>({
@@ -30,7 +30,7 @@ export default function DoctorsProvider({ children }: Props): ReactNode {
   const { filters } = useContext(FiltersContext);
   const { ordering } = useContext(OrderContext);
 
-  const [doctors, setDoctors] = useState<DoctorType[]>([]);
+  const [doctors, setDoctors] = useState<CompactedDoctorType[]>([]);
 
   useEffect(() => {
     const getDoctors = async () => {
@@ -52,7 +52,7 @@ export default function DoctorsProvider({ children }: Props): ReactNode {
         ...formattedFilters,
       });
 
-      const result = await fetchWithToast<DoctorType[]>(
+      const result = await fetchWithToast<CompactedDoctorType[]>(
         `/api/doctor?${params.toString()}`,
       );
 

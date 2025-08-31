@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
 
 import { notFound } from "next/navigation";
 
@@ -9,8 +11,11 @@ import CommentComponent from "@/app/doctor/[id]/components/comments/comments.com
 import GetAppointmentComponent from "@/app/doctor/[id]/components/get-appointment/get-appointment.component";
 import InfoComponent from "@/app/doctor/[id]/components/info/info.component";
 import OnlineVisitComponent from "@/app/doctor/[id]/components/online-visit/online-visit.component";
+import Loading from "@/app/loading";
 
-import { doctors } from "@/mock/doctors";
+import { DoctorType } from "@/types/doctor.type";
+
+import { fetchWithToast } from "@/utils/fetch.util";
 
 import styles from "./page.module.css";
 
@@ -19,10 +24,29 @@ type Props = {
 };
 
 export default function Page({ params }: Props): ReactNode {
-  const doctor = doctors.find((doctor) => `${doctor.id}` === params.id);
+  const [doctor, setDoctor] = useState<DoctorType | null | undefined>(
+    undefined,
+  );
 
-  if (!doctor) {
+  useEffect(() => {
+    const getDoctor = async () => {
+      const result = await fetchWithToast<DoctorType>(
+        `/api/doctor/${params.id}`,
+      );
+
+      if (result.data) {
+        setDoctor(result.data);
+      }
+    };
+    getDoctor().then();
+  }, [params]);
+
+  if (doctor === null) {
     return notFound();
+  }
+
+  if (doctor === undefined) {
+    return <Loading />;
   }
 
   return (

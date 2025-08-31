@@ -11,13 +11,11 @@ import { DoctorsContext } from "@/app/search/providers/doctors/doctors.provider"
 
 import CardComponent from "@/components/card/card.component";
 
-import { GenderEnum } from "@/enums/gender.enum";
-
 import MingcuteCheckFill from "@/icons/MingcuteCheckFill";
 import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
 import MingcuteStarFill from "@/icons/MingcuteStarFill";
 
-import { convertDateTime } from "@/utils/data.util";
+import { convertDateTime } from "@/utils/date-time.util";
 
 import styles from "./results.module.css";
 
@@ -45,10 +43,7 @@ export default function ResultsComponent({ className }: Props): ReactNode {
               </div>
               <div className={styles.info}>
                 <b className={styles.title}>
-                  {doctor.gender === GenderEnum.MAN
-                    ? `${GenderEnum.MAN}ی `
-                    : `${GenderEnum.WOMAN} `}
-                  دکتر {doctor.name}
+                  {doctor.gender} دکتر {doctor.name}
                 </b>
                 <p className={styles.category}>{doctor.expertise}</p>
                 <p className={styles.address}>

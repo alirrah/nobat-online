@@ -6,7 +6,7 @@ import { CommentsContext } from "@/app/doctor/[id]/providers/comments/comments.p
 
 import MingcuteUserFill from "@/icons/MingcuteUserFill";
 
-import { convertDateTime } from "@/utils/data.util";
+import { convertDateTime } from "@/utils/date-time.util";
 
 import styles from "./comments-result.module.css";
 

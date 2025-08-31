@@ -1,20 +1,11 @@
 import Prisma from "@prisma/client";
 
-export type DoctorType = Omit<
-  Prisma.Doctor,
-  | "medicalSystemNumber"
-  | "genderId"
-  | "expertiseId"
-  | "aboutMe"
-  | "onlineVisitPrice"
-  | "activeConsultNumber"
-  | "createdAt"
-  | "addresses"
-> & {
-  gender: string;
-  expertise: string;
+import { AddressType } from "@/types/address.type";
+
+export type DoctorType = Omit<Prisma.Doctor, "aboutMe"> & {
+  aboutMe: string | undefined;
+  totalPeopleRate: number;
   averageRating: number;
-  addresses: {
-    location: string;
-  }[];
+  expertise: Prisma.Expertise;
+  addresses: AddressType[];
 };

@@ -19,7 +19,7 @@ export default function AboutMeComponent({ aboutMe }: Props): ReactNode {
       outsideTitle="درباره من"
       className={styles["about-me"]}
     >
-      <p>{aboutMe}</p>
+      <p dangerouslySetInnerHTML={{ __html: aboutMe }} />
     </CardComponent>
   );
 }

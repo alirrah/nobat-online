@@ -5,13 +5,13 @@ import { Prisma } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 import { ApiResponseType } from "@/types/api-response.type";
-import { DoctorType } from "@/types/doctor.type";
+import { CompactedDoctorType } from "@/types/compacted-doctor.type";
 
 import { wrapWithTryCatch } from "@/utils/api.util";
 
 export async function GET(
   request: Request,
-): Promise<ApiResponseType<DoctorType[]>> {
+): Promise<ApiResponseType<CompactedDoctorType[]>> {
   return wrapWithTryCatch(async () => {
     const url = new URL(request.url);
     const searchParams = url.searchParams;
