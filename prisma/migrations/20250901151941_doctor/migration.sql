@@ -19,7 +19,7 @@ CREATE TABLE "Address" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "location" TEXT NOT NULL,
-    "phones" JSONB NOT NULL,
+    "phones" TEXT[],
     "doctorId" INTEGER NOT NULL,
 
     CONSTRAINT "Address_pkey" PRIMARY KEY ("id")
@@ -30,11 +30,11 @@ CREATE TABLE "Doctor" (
     "id" SERIAL NOT NULL,
     "genderId" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "image" TEXT NOT NULL DEFAULT '/getImage/p24/search-women/noimage.png?size=150',
     "expertiseId" INTEGER NOT NULL,
     "medicalSystemNumber" INTEGER NOT NULL,
     "isVerified" BOOLEAN NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "activeConsultNumber" INTEGER,
     "firstAvailableAppointment" TIMESTAMP(3) NOT NULL,
     "aboutMe" TEXT,

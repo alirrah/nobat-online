@@ -33,15 +33,6 @@ export async function GET(
 
     const formatedDoctor = {
       ...doctor,
-      aboutMe: doctor.aboutMe?.replace(/\\n/g, "<br>"),
-      addresses: doctor.addresses.map((address) => ({
-        ...address,
-        phones: address.phones
-          ?.toString()
-          .split("\n")
-          .map((s) => s.replace(/"/g, ""))
-          .filter(Boolean),
-      })),
       averageRating: 0, //TODO should update when vote added
       totalPeopleRate: 0, //TODO should update when vote added
     };
