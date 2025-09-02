@@ -34,6 +34,7 @@ export default function Page({ params }: Props): ReactNode {
         `/api/doctor/${params.id}`,
       );
 
+      debugger;
       if (result.data) {
         setDoctor(result.data);
       }

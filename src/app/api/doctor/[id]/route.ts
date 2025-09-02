@@ -6,6 +6,7 @@ import { ApiResponseType } from "@/types/api-response.type";
 import { DoctorType } from "@/types/doctor.type";
 
 import { wrapWithTryCatch } from "@/utils/api.util";
+import { isNumeric } from "@/utils/type.util";
 
 export async function GET(
   _: Request,
@@ -17,6 +18,20 @@ export async function GET(
 ): Promise<ApiResponseType<DoctorType | null>> {
   return wrapWithTryCatch(async () => {
     const { id } = params;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "مقدار فیلد شناسه دکتر اجبار است." },
+        { status: 400 },
+      );
+    }
+
+    if (!isNumeric(id)) {
+      return NextResponse.json(
+        { error: "شناسه دکتر اشتباه است." },
+        { status: 400 },
+      );
+    }
 
     const doctor = await prisma.doctor.findUnique({
       where: { id: parseInt(id) },
