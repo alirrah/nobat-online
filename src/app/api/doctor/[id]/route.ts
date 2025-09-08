@@ -15,7 +15,7 @@ export async function GET(
   }: {
     params: { id: string };
   },
-): Promise<ApiResponseType<DoctorType | null>> {
+): Promise<ApiResponseType<Omit<DoctorType, "addresses"> | null>> {
   return wrapWithTryCatch(async () => {
     const { id } = params;
 
@@ -34,7 +34,7 @@ export async function GET(
     }
 
     const doctor = await prisma.doctor.findUnique({
-      where: { id: parseInt(id) },
+      where: { id: Number(id) },
       include: {
         addresses: true,
         gender: true,

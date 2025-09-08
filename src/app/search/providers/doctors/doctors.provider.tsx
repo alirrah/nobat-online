@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 
+import Loading from "@/app/loading";
 import { FiltersContext } from "@/app/search/providers/filters/filters.provider";
 import { OrderContext } from "@/app/search/providers/order/order.provider";
 
@@ -30,21 +31,19 @@ export default function DoctorsProvider({ children }: Props): ReactNode {
   const { filters } = useContext(FiltersContext);
   const { ordering } = useContext(OrderContext);
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [doctors, setDoctors] = useState<CompactedDoctorType[]>([]);
 
   useEffect(() => {
     const getDoctors = async () => {
+      setLoading(true);
+
       const orderingParam = ordering ? String(ordering) : "";
 
-      const formattedFilters: Record<string, string> = Object.keys(
-        filters,
-      ).reduce(
-        (acc, key) => {
-          const value = filters[key as keyof typeof filters];
-          acc[key] = value ? String(value) : "";
-          return acc;
-        },
-        {} as Record<string, string>,
+      const formattedFilters = Object.fromEntries(
+        Object.entries(filters)
+          .map(([key, value]) => [key, value ? String(value) : ""])
+          .filter(([, value]) => value !== ""),
       );
 
       const params = new URLSearchParams({
@@ -59,13 +58,15 @@ export default function DoctorsProvider({ children }: Props): ReactNode {
       if (result.data) {
         setDoctors(result.data);
       }
+
+      setLoading(false);
     };
     getDoctors().then();
   }, [filters, ordering]);
 
   return (
     <DoctorsContext.Provider value={{ doctors }}>
-      {children}
+      {loading ? <Loading /> : children}
     </DoctorsContext.Provider>
   );
 }

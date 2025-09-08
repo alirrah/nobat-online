@@ -34,9 +34,12 @@ export default function Page({ params }: Props): ReactNode {
         `/api/doctor/${params.id}`,
       );
 
-      debugger;
       if (result.data) {
         setDoctor(result.data);
+      }
+
+      if (result.error === "موردی یافت نشد") {
+        setDoctor(null);
       }
     };
     getDoctor().then();

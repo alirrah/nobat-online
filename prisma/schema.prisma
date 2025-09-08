@@ -45,11 +45,9 @@ model Address {
 model Doctor {
   id                        Int       @id @default(autoincrement())
   genderId                  Int
-  gender                    Gender    @relation(fields: [genderId], references: [id])
   name                      String
   image                     String    @default("/getImage/p24/search-women/noimage.png?size=150")
   expertiseId               Int
-  expertise                 Expertise @relation(fields: [expertiseId], references: [id])
   medicalSystemNumber       Int       @unique
   isVerified                Boolean
   createdAt                 DateTime  @default(now()) @db.Date
@@ -58,4 +56,6 @@ model Doctor {
   aboutMe                   String?
   onlineVisitPrice          Int?
   addresses                 Address[]
+  expertise                 Expertise @relation(fields: [expertiseId], references: [id])
+  gender                    Gender    @relation(fields: [genderId], references: [id])
 }

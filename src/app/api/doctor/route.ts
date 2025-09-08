@@ -19,89 +19,35 @@ export async function GET(
     const url = new URL(request.url);
     const searchParams = url.searchParams;
 
+    const validation = validateDoctorSearchQuery(searchParams);
+
+    if (!validation.success) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    const { gender, expertise, isVerified, query, order } = validation.data;
+
     const where: Prisma.DoctorWhereInput = {};
-    let orderBy: Prisma.DoctorOrderByWithRelationInput | undefined = undefined;
+    let orderBy: Prisma.DoctorOrderByWithRelationInput | undefined;
 
-    const gender = searchParams.get("gender");
-    if (gender) {
-      if (!isNumeric(gender)) {
-        return NextResponse.json(
-          { error: "شناسه جنسیت اشتباه است." },
-          { status: 400 },
-        );
-      }
+    if (gender !== undefined) where.genderId = gender;
+    if (expertise !== undefined) where.expertiseId = expertise;
+    if (isVerified !== undefined) where.isVerified = isVerified;
 
-      where.genderId = parseInt(gender);
-    }
-
-    const expertise = searchParams.get("expertise");
-    if (expertise) {
-      if (!isNumeric(expertise)) {
-        return NextResponse.json(
-          { error: "شناسه تخصص اشتباه است." },
-          { status: 400 },
-        );
-      }
-
-      where.expertiseId = parseInt(expertise);
-    }
-
-    const isVerified = searchParams.get("isVerified");
-    if (isVerified) {
-      if (!isBoolean(isVerified)) {
-        return NextResponse.json(
-          { error: "مقدار منتخب بودن اشتباه است." },
-          { status: 400 },
-        );
-      }
-
-      where.isVerified = isVerified === "true";
-    }
-
-    const query = searchParams.get("query");
     if (query) {
       where.OR = [
-        {
-          name: {
-            contains: query,
-            mode: "insensitive",
-          },
-        },
-        {
-          expertise: {
-            label: {
-              contains: query,
-              mode: "insensitive",
-            },
-          },
-        },
+        { name: { contains: query, mode: "insensitive" } },
+        { expertise: { label: { contains: query, mode: "insensitive" } } },
         {
           addresses: {
-            some: {
-              location: {
-                contains: query,
-                mode: "insensitive",
-              },
-            },
+            some: { location: { contains: query, mode: "insensitive" } },
           },
         },
       ];
     }
 
-    const order = searchParams.get("order");
-    if (order) {
-      if (
-        order != OrderingEnum.ALPHABETICALLY &&
-        OrderingEnum.DEFAULT != order
-      ) {
-        return NextResponse.json({ error: "" }, { status: 400 });
-      }
-
-      if (order === OrderingEnum.ALPHABETICALLY) {
-        orderBy = {
-          name: "asc",
-        };
-      }
+    if (order === OrderingEnum.ALPHABETICALLY) {
+      orderBy = { name: "asc" };
     }
 
     const doctors = await prisma.doctor.findMany({
@@ -141,4 +87,64 @@ export async function GET(
 
     return NextResponse.json({ data: formatedDoctors }, { status: 200 });
   });
+}
+
+type DoctorQueryParams = {
+  gender?: number;
+  expertise?: number;
+  isVerified?: boolean;
+  query?: string;
+  order?: OrderingEnum;
+};
+
+function validateDoctorSearchQuery(
+  searchParams: URLSearchParams,
+):
+  | { success: true; data: DoctorQueryParams }
+  | { success: false; error: string } {
+  const gender = searchParams.get("gender");
+  const expertise = searchParams.get("expertise");
+  const isVerified = searchParams.get("isVerified");
+  const query = searchParams.get("query");
+  const order = searchParams.get("order");
+
+  const result: DoctorQueryParams = {};
+
+  if (gender) {
+    if (!isNumeric(gender)) {
+      return { success: false, error: "شناسه جنسیت اشتباه است." };
+    }
+    result.gender = Number(gender);
+  }
+
+  if (expertise) {
+    if (!isNumeric(expertise)) {
+      return { success: false, error: "شناسه تخصص اشتباه است." };
+    }
+    result.expertise = Number(expertise);
+  }
+
+  if (isVerified) {
+    if (!isBoolean(isVerified)) {
+      return { success: false, error: "مقدار منتخب بودن اشتباه است." };
+    }
+    result.isVerified = isVerified === "true";
+  }
+
+  if (query) {
+    result.query = query;
+  }
+
+  if (order) {
+    if (
+      ![OrderingEnum.ALPHABETICALLY, OrderingEnum.DEFAULT].includes(
+        order as OrderingEnum,
+      )
+    ) {
+      return { success: false, error: "مقدار مرتب‌سازی اشتباه است." };
+    }
+    result.order = order as OrderingEnum;
+  }
+
+  return { success: true, data: result };
 }

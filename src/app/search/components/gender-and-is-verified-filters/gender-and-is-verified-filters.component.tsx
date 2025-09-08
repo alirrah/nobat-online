@@ -14,9 +14,9 @@ import { fetchWithToast } from "@/utils/fetch.util";
 import styles from "./gender-and-is-verified-filters.module.css";
 
 export default function GenderAndIsVerifiedFiltersComponent(): ReactNode {
-  const [gender, setGender] = useState<OptionType[]>([]);
-
   const { filters, dispatchFilters } = useContext(FiltersContext);
+
+  const [gender, setGender] = useState<OptionType[]>([]);
 
   useEffect(() => {
     const getDoctors = async () => {
