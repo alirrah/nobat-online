@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 
 import Image from "next/image";
 
+import { toast } from "react-toastify";
+
 import ButtonComponent from "@/components/button/button.component";
 import CardComponent from "@/components/card/card.component";
 
@@ -21,6 +23,7 @@ export default function InfoComponent({ doctor }: Props): ReactNode {
   const handleCopy = async () => {
     const url = window?.location.href ?? "";
     await navigator.clipboard.writeText(url);
+    toast.success("آدرس کپی شد.");
   };
 
   return (

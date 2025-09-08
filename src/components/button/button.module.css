@@ -22,6 +22,14 @@
     --darker: var(--color-danger);
   }
 
+  &:disabled {
+    cursor: not-allowed;
+
+    --primary: var(--color-secondary-darker);
+    --secondary: var(--color-secondary-lighter);
+    --darker: var(--color-secondary-darker);
+  }
+
   &.inherit {
     background-color: var(--secondary);
 
@@ -29,7 +37,7 @@
 
     color: var(--primary);
 
-    &:not(:disabled):hover {
+    &:hover {
       color: var(--darker);
     }
   }
@@ -41,7 +49,7 @@
 
     color: var(--secondary);
 
-    &:not(:disabled):hover {
+    &:hover {
       background-color: var(--darker);
     }
   }
@@ -53,7 +61,7 @@
 
     color: var(--primary);
 
-    &:not(:disabled):hover {
+    &:hover {
       background-color: var(--primary);
 
       color: var(--secondary);

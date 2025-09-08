@@ -15,10 +15,6 @@ export async function fetchWithToast<T>(
   const result = await response.json();
 
   if (!response.ok) {
-    if (response.status === 404) {
-      return { error: "موردی یافت نشد" };
-    }
-
     let message: string = "خطای غیرمنتظره رخ داد.";
 
     if ("error" in result) {

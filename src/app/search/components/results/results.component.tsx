@@ -43,7 +43,8 @@ export default function ResultsComponent({ className }: Props): ReactNode {
               </div>
               <div className={styles.info}>
                 <b className={styles.title}>
-                  {doctor.gender} دکتر {doctor.name}
+                  {doctor.gender + (doctor.gender === "آقا" ? "ی" : "")} دکتر{" "}
+                  {doctor.name}
                 </b>
                 <p className={styles.category}>{doctor.expertise}</p>
                 <p className={styles.address}>

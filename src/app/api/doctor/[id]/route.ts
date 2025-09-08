@@ -43,7 +43,10 @@ export async function GET(
     });
 
     if (!doctor) {
-      return NextResponse.json({ data: null }, { status: 404 });
+      return NextResponse.json(
+        { error: "دکتر مورد نظر شما یافت نشد." },
+        { status: 404 },
+      );
     }
 
     const formatedDoctor = {

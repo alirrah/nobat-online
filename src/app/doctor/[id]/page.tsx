@@ -38,7 +38,7 @@ export default function Page({ params }: Props): ReactNode {
         setDoctor(result.data);
       }
 
-      if (result.error === "موردی یافت نشد") {
+      if (result.error === "دکتر مورد نظر شما یافت نشد.") {
         setDoctor(null);
       }
     };
