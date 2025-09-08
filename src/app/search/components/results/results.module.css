@@ -65,6 +65,7 @@
           &.time {
             display: flex;
             gap: 1ch;
+
             font-size: var(--fz-200);
           }
         }
