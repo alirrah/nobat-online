@@ -1,25 +1,10 @@
-import { ExpertiseEnum } from "@/enums/expertise.enum";
-import { GenderEnum } from "@/enums/gender.enum";
+import Prisma from "@prisma/client";
 
 import { AddressType } from "@/types/address.type";
 
-export type DoctorType = {
-  id: number;
-  gender: GenderEnum;
-  name: string;
-  image: string;
-  expertise: ExpertiseEnum;
-  medicalSystemNumber: number;
-  isVerified: boolean;
-  activity: {
-    month?: number;
-    year?: number;
-  };
-  activeConsultNumber?: number;
-  averageRating: number;
-  firstAvailableAppointment: string;
+export type DoctorType = Prisma.Doctor & {
   totalPeopleRate: number;
-  aboutMe?: string;
-  onlineVisitPrice?: number;
+  averageRating: number;
+  expertise: Prisma.Expertise;
   addresses: AddressType[];
 };

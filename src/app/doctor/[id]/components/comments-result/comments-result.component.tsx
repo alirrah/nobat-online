@@ -6,6 +6,8 @@ import { CommentsContext } from "@/app/doctor/[id]/providers/comments/comments.p
 
 import MingcuteUserFill from "@/icons/MingcuteUserFill";
 
+import { convertDateTime } from "@/utils/date-time.util";
+
 import styles from "./comments-result.module.css";
 
 export default function CommentsResultComponent(): ReactNode {
@@ -32,17 +34,4 @@ export default function CommentsResultComponent(): ReactNode {
       ))}
     </ul>
   );
-}
-
-const options: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-};
-
-function convertDateTime(inputDate: string) {
-  return new Date(inputDate).toLocaleDateString("fa-IR-u-nu-latn", options);
 }

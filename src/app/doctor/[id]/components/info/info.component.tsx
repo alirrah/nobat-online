@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 
 import Image from "next/image";
 
+import { toast } from "react-toastify";
+
 import ButtonComponent from "@/components/button/button.component";
 import CardComponent from "@/components/card/card.component";
 
@@ -20,7 +22,8 @@ type Props = {
 export default function InfoComponent({ doctor }: Props): ReactNode {
   const handleCopy = async () => {
     const url = window?.location.href ?? "";
-    await navigator.share({ url });
+    await navigator.clipboard.writeText(url);
+    toast.success("آدرس کپی شد.");
   };
 
   return (
@@ -50,7 +53,7 @@ export default function InfoComponent({ doctor }: Props): ReactNode {
         </div>
       </CardComponent>
       <div className={styles.detail}>
-        <p className={styles.expertise}>{doctor.expertise}</p>
+        <p className={styles.expertise}>{doctor.expertise.label}</p>
         <p className={styles.rate}>
           <span>{Math.floor(doctor.averageRating * 100) / 100} از 5</span> رضایت
           ({doctor.totalPeopleRate} نفر)

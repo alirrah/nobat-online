@@ -44,16 +44,19 @@ const menu: MenuItemType[] = [
 const socialMedia: socialLinkType[] = [
   {
     id: 0,
+    title: "تلگرام",
     icon: <MingcuteTelegramFill />,
     link: "https://t.me/alirrah81",
   },
   {
     id: 1,
+    title: "لینکدین",
     icon: <MingcuteLinkedinFill />,
     link: "https://www.linkedin.com/in/alireza-rahmani-samani-996477216/",
   },
   {
     id: 2,
+    title: "اینستاگرام",
     icon: <MingcuteInsFill />,
     link: "https://instagram.com/alirrah81",
   },

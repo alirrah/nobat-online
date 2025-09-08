@@ -22,6 +22,14 @@
     --darker: var(--color-danger);
   }
 
+  &:disabled {
+    cursor: not-allowed;
+
+    --primary: var(--color-secondary-darker);
+    --secondary: var(--color-secondary-lighter);
+    --darker: var(--color-secondary-darker);
+  }
+
   &.inherit {
     background-color: var(--secondary);
 

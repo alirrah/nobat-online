@@ -5,7 +5,7 @@ import CardComponent from "@/components/card/card.component";
 import styles from "./about-me.module.css";
 
 type Props = {
-  aboutMe?: string;
+  aboutMe: string | null;
 };
 
 export default function AboutMeComponent({ aboutMe }: Props): ReactNode {

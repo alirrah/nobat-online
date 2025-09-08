@@ -9,11 +9,7 @@ import OrderProvider from "@/app/search/providers/order/order.provider";
 
 import GlobalSearchBoxComponent from "@/components/global-search-box/global-search-box.component";
 
-import { ExpertiseEnum } from "@/enums/expertise.enum";
-import { GenderEnum } from "@/enums/gender.enum";
 import { OrderingEnum } from "@/enums/ordering.enum";
-
-import { doctors } from "@/mock/doctors";
 
 import { FiltersType } from "@/types/filters.type";
 
@@ -36,7 +32,7 @@ export default function Page({ searchParams }: Props): ReactNode {
           <GlobalSearchBoxComponent />
           <div className={styles.results}>
             <SidebarFiltersComponent className={styles["filters"]} />
-            <DoctorsProvider items={doctors}>
+            <DoctorsProvider>
               <TopBarComponent className={styles["ordering"]} />
               <ResultsComponent className={styles["results-list"]} />
             </DoctorsProvider>
@@ -50,22 +46,14 @@ export default function Page({ searchParams }: Props): ReactNode {
 function generateDefaultFilters(searchParams: SearchParams): FiltersType {
   const { query, expertise, gender, isVerified } = searchParams;
 
-  let normalizedExpertise = normalizeFilter(expertise);
-  let normalizedGender = normalizeFilter(gender);
+  const normalizedExpertise = normalizeFilter(expertise);
+  const normalizedGender = normalizeFilter(gender);
   const isVerifiedBoolean = normalizeFilter(isVerified) === "true";
-
-  if (normalizedExpertise && isNotValid(normalizedExpertise, ExpertiseEnum)) {
-    normalizedExpertise = "";
-  }
-
-  if (normalizedGender && isNotValid(normalizedGender, GenderEnum)) {
-    normalizedGender = "";
-  }
 
   return {
     query: normalizeFilter(query),
-    expertise: normalizedExpertise as ExpertiseEnum | undefined,
-    gender: normalizedGender as GenderEnum | undefined,
+    expertise: normalizedExpertise,
+    gender: normalizedGender,
     isVerified: isVerifiedBoolean,
   };
 }
@@ -75,11 +63,8 @@ function generateDefaultOrdering(searchParams: SearchParams): OrderingEnum {
 
   let normalizedOrdering = normalizeFilter(ordering);
 
-  if (
-    !normalizedOrdering ||
-    (normalizedOrdering && isNotValid(normalizedOrdering, OrderingEnum))
-  ) {
-    normalizedOrdering = OrderingEnum.ALPHABETICALLY;
+  if (!normalizedOrdering) {
+    normalizedOrdering = OrderingEnum.DEFAULT;
   }
 
   return normalizedOrdering as OrderingEnum;
@@ -92,11 +77,4 @@ function normalizeFilter(
     return value[0];
   }
   return value;
-}
-
-function isNotValid(
-  value: string,
-  collection: typeof ExpertiseEnum | typeof GenderEnum | typeof OrderingEnum,
-): boolean {
-  return !Object.values(collection).includes(value);
 }

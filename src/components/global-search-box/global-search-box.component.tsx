@@ -9,6 +9,8 @@ import { OrderContext } from "@/app/search/providers/order/order.provider";
 
 import ButtonComponent from "@/components/button/button.component";
 
+import { OrderingEnum } from "@/enums/ordering.enum";
+
 import MingcuteLocationFill from "@/icons/MingcuteLocationFill";
 import MingcuteSearchFill from "@/icons/MingcuteSearchFill";
 
@@ -51,7 +53,8 @@ export default function GlobalSearchBoxComponent(): ReactNode {
     const filterExpertise = filters.expertise;
     const filterGender = filters.gender;
     const filterIsVerified = filters.isVerified;
-    const filterOrdering = ordering;
+    const filterOrdering =
+      ordering === OrderingEnum.ALPHABETICALLY ? ordering : undefined;
 
     const searchParams: string[] = [];
 

@@ -11,11 +11,11 @@ import { DoctorsContext } from "@/app/search/providers/doctors/doctors.provider"
 
 import CardComponent from "@/components/card/card.component";
 
-import { GenderEnum } from "@/enums/gender.enum";
-
 import MingcuteCheckFill from "@/icons/MingcuteCheckFill";
 import MingcuteLocationLine from "@/icons/MingcuteLocationLine";
 import MingcuteStarFill from "@/icons/MingcuteStarFill";
+
+import { convertDateTime } from "@/utils/date-time.util";
 
 import styles from "./results.module.css";
 
@@ -24,11 +24,11 @@ type Props = {
 };
 
 export default function ResultsComponent({ className }: Props): ReactNode {
-  const { filteredDoctors } = useContext(DoctorsContext);
+  const { doctors } = useContext(DoctorsContext);
 
   return (
     <ul className={clsx(styles.results, className)}>
-      {filteredDoctors.map((doctor) => (
+      {doctors.map((doctor) => (
         <li key={doctor.id}>
           <CardComponent showShadow className={styles.box}>
             <div className={styles["doctor-card"]}>
@@ -43,17 +43,18 @@ export default function ResultsComponent({ className }: Props): ReactNode {
               </div>
               <div className={styles.info}>
                 <b className={styles.title}>
-                  {doctor.gender === GenderEnum.MAN
-                    ? `${GenderEnum.MAN}ی `
-                    : `${GenderEnum.WOMAN} `}
-                  دکتر {doctor.name}
+                  {doctor.gender + (doctor.gender === "آقا" ? "ی" : "")} دکتر{" "}
+                  {doctor.name}
                 </b>
                 <p className={styles.category}>{doctor.expertise}</p>
                 <p className={styles.address}>
                   <MingcuteLocationLine /> {doctor.addresses?.[0].location}
                 </p>
                 <p className={styles.time}>
-                  اولین نوبت: <b>{doctor.firstAvailableAppointment}</b>
+                  اولین نوبت:
+                  <b>
+                    {convertDateTime(`${doctor.firstAvailableAppointment}`)}
+                  </b>
                 </p>
               </div>
               <div className={styles.star}>

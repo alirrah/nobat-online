@@ -14,9 +14,48 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(uuid())
-  name      String
-  username  String @unique
-  email     String @unique
-  password  String
+  id       String @id @default(uuid())
+  name     String
+  username String @unique
+  email    String @unique
+  password String
+}
+
+model Gender {
+  id      Int      @id @default(autoincrement())
+  label   String   @unique
+  doctors Doctor[]
+}
+
+model Expertise {
+  id      Int      @id @default(autoincrement())
+  label   String   @unique
+  doctors Doctor[]
+}
+
+model Address {
+  id       Int      @id @default(autoincrement())
+  title    String
+  location String
+  phones   String[]
+  doctorId Int
+  doctor   Doctor   @relation(fields: [doctorId], references: [id])
+}
+
+model Doctor {
+  id                        Int       @id @default(autoincrement())
+  genderId                  Int
+  name                      String
+  image                     String    @default("/getImage/p24/search-women/noimage.png?size=150")
+  expertiseId               Int
+  medicalSystemNumber       Int       @unique
+  isVerified                Boolean
+  createdAt                 DateTime  @default(now()) @db.Date
+  activeConsultNumber       Int?
+  firstAvailableAppointment DateTime
+  aboutMe                   String?
+  onlineVisitPrice          Int?
+  addresses                 Address[]
+  expertise                 Expertise @relation(fields: [expertiseId], references: [id])
+  gender                    Gender    @relation(fields: [genderId], references: [id])
 }
