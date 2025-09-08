@@ -20,7 +20,7 @@ type Props = {
 export default function InfoComponent({ doctor }: Props): ReactNode {
   const handleCopy = async () => {
     const url = window?.location.href ?? "";
-    await navigator.share({ url });
+    await navigator.clipboard.writeText(url);
   };
 
   return (
