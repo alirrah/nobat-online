@@ -25,12 +25,15 @@ export default function SignUpFormComponent(): ReactNode {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const formSubmitHandler = async (
     e: FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     e.preventDefault();
+
+    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
 
@@ -49,6 +52,8 @@ export default function SignUpFormComponent(): ReactNode {
       },
       "ثبت‌نام با موفقیت انجام شد.",
     );
+
+    setLoading(false);
 
     if (result.error) {
       return;
@@ -95,6 +100,7 @@ export default function SignUpFormComponent(): ReactNode {
         variant="primary"
         shape="solid"
         className={styles.submit}
+        disabled={loading}
       >
         ثبت‌نام
       </ButtonComponent>

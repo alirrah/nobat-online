@@ -14,6 +14,7 @@ type Props = PropsWithChildren & {
   size?: ButtonSize;
   className?: string;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 export default function ButtonComponent({
@@ -23,6 +24,7 @@ export default function ButtonComponent({
   className,
   onClick,
   children,
+  disabled = false,
 }: Props): ReactNode {
   return (
     <button
@@ -34,6 +36,7 @@ export default function ButtonComponent({
         styles[size],
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
