@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { ACCESS_TOKEN_KEY } from "@/config";
+
 import MingcuteExitLine from "@/icons/MingcuteExitLine";
 
 import { fetchWithToast } from "@/utils/fetch.util";
@@ -30,6 +32,7 @@ export default function SignOutButtonComponent({
       return;
     }
 
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
     router.push("/");
   };
   return (

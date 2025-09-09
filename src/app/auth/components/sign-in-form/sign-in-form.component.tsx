@@ -4,6 +4,8 @@ import { FormEvent, ReactNode, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { ACCESS_TOKEN_KEY } from "@/config";
+
 import ButtonComponent from "@/components/button/button.component";
 import InputComponent from "@/components/input/input.component";
 
@@ -40,7 +42,7 @@ export default function SignInFormComponent(): ReactNode {
       password: formData.get("password") as string,
     };
 
-    const result = await fetchWithToast<null>(
+    const result = await fetchWithToast<string>(
       "/api/auth/sign-in",
       {
         method: "POST",
@@ -48,6 +50,10 @@ export default function SignInFormComponent(): ReactNode {
       },
       "خوش آمدید!",
     );
+
+    if (result.data) {
+      localStorage.setItem(ACCESS_TOKEN_KEY, result.data);
+    }
 
     setLoading(false);
 
