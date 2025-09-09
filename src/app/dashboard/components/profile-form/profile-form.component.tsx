@@ -29,11 +29,16 @@ export default function ProfileFormComponent(): ReactNode {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      setStatus("padding");
+
       const result = await fetchWithToast<EditProfileDto>(
         "/api/dashboard/profile",
       );
 
       if (result.error) {
+        if (result.error === "ابتدا وارد حساب کاربری خود شوید.") {
+        }
+
         setStatus("error");
         return;
       }
@@ -48,6 +53,8 @@ export default function ProfileFormComponent(): ReactNode {
   const formSubmitHandler = async (
     e: FormEvent<HTMLFormElement>,
   ): Promise<void> => {
+    setStatus("padding");
+
     e.preventDefault();
 
     const result = await fetchWithToast<null>(
@@ -62,6 +69,8 @@ export default function ProfileFormComponent(): ReactNode {
     if (result.error) {
       return;
     }
+
+    setStatus("success");
   };
 
   if (status === "padding") {

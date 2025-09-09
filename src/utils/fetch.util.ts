@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN_KEY } from "@/config";
 import { toast } from "react-toastify";
 
 import { FetchDataType } from "@/types/api-response.type";
@@ -7,8 +8,18 @@ export async function fetchWithToast<T>(
   init: RequestInit = {},
   successMessage?: string,
 ): Promise<FetchDataType<T>> {
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+
+  if (accessToken) {
+    headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
   const response = await fetch(input, {
-    headers: { "Content-Type": "application/json" },
+    headers,
     ...init,
   });
 

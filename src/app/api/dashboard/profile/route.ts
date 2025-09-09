@@ -80,7 +80,7 @@ export async function PATCH(
 }
 
 async function findUser(request: NextRequest): Promise<Prisma.User | null> {
-  const userID = await extractUserID(request);
+  const userID = await extractUserID(request, "header");
 
   if (!userID) {
     return null;
