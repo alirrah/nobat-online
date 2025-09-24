@@ -1,12 +1,12 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { ACCESS_TOKEN_KEY } from "@/config";
-
 import MingcuteExitLine from "@/icons/MingcuteExitLine";
+
+import { AuthTokenContext } from "@/providers/auth-token/auth-token.provider";
 
 import { fetchWithToast } from "@/utils/fetch.util";
 
@@ -19,12 +19,16 @@ export default function SignOutButtonComponent({
 }: Props): ReactNode {
   const router = useRouter();
 
+  const { setToken } = useContext(AuthTokenContext);
+
   const signOutButtonClickHandler = async (): Promise<void> => {
     const result = await fetchWithToast<null>(
       "/api/auth/sign-out",
       {
         method: "POST",
       },
+      null,
+      setToken,
       "به امید دیدار!",
     );
 
@@ -32,7 +36,7 @@ export default function SignOutButtonComponent({
       return;
     }
 
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    setToken(null);
     router.push("/");
   };
   return (

@@ -11,6 +11,8 @@ import MingcuteInsFill from "@/icons/MingcuteInsFill";
 import MingcuteLinkedinFill from "@/icons/MingcuteLinkedinFill";
 import MingcuteTelegramFill from "@/icons/MingcuteTelegramFill";
 
+import AuthTokenProvider from "@/providers/auth-token/auth-token.provider";
+
 import { MenuItemType } from "@/types/menu-item.type";
 import { socialLinkType } from "@/types/social-link.type";
 
@@ -71,7 +73,9 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className={vazirmatn.className}>
       <body>
         <HeaderComponent menu={menu} />
-        <main>{children}</main>
+        <AuthTokenProvider>
+          <main>{children}</main>
+        </AuthTokenProvider>
         <FooterComponent socialMedia={socialMedia} />
         <ToasterComponent />
       </body>

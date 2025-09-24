@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, ReactNode, useEffect, useState } from "react";
+import { FormEvent, ReactNode, useContext, useEffect, useState } from "react";
 
 import Loading from "@/app/loading";
 
@@ -16,11 +16,15 @@ import MingcuteLockFill from "@/icons/MingcuteLockFill";
 import MingcuteMailFill from "@/icons/MingcuteMailFill";
 import MingcuteUser3Fill from "@/icons/MingcuteUser3Fill";
 
+import { AuthTokenContext } from "@/providers/auth-token/auth-token.provider";
+
 import { fetchWithToast } from "@/utils/fetch.util";
 
 import styles from "./profile-form.module.css";
 
 export default function ProfileFormComponent(): ReactNode {
+  const { token, setToken } = useContext(AuthTokenContext);
+
   const [values, setValues] = useState<EditProfileDto>({});
   const [status, setStatus] = useState<"padding" | "error" | "success">(
     "success",
@@ -33,6 +37,8 @@ export default function ProfileFormComponent(): ReactNode {
 
       const result = await fetchWithToast<EditProfileDto>(
         "/api/dashboard/profile",
+        {},
+        token,
       );
 
       if (result.error) {
@@ -48,7 +54,7 @@ export default function ProfileFormComponent(): ReactNode {
     };
 
     fetchProfile().then();
-  }, []);
+  }, [token]);
 
   const formSubmitHandler = async (
     e: FormEvent<HTMLFormElement>,
@@ -63,6 +69,8 @@ export default function ProfileFormComponent(): ReactNode {
         method: "PATCH",
         body: JSON.stringify(values),
       },
+      token,
+      setToken,
       "ویرایش با موفقیت انجام شد.",
     );
 

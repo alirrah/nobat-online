@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 
 import clsx from "clsx";
 
@@ -15,6 +15,7 @@ type Props = PropsWithChildren & {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 };
 
 export default function ButtonComponent({
@@ -25,6 +26,7 @@ export default function ButtonComponent({
   onClick,
   children,
   disabled = false,
+  type,
 }: Props): ReactNode {
   return (
     <button
@@ -37,6 +39,7 @@ export default function ButtonComponent({
       )}
       onClick={onClick}
       disabled={disabled}
+      type={type}
     >
       {children}
     </button>

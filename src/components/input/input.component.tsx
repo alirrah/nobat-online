@@ -25,6 +25,7 @@ export default function InputComponent({
           size="small"
           className={styles.suffix}
           onClick={onSuffixClick}
+          type="button"
         >
           {suffixIcon}
         </ButtonComponent>

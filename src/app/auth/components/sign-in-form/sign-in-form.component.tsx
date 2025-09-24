@@ -1,10 +1,8 @@
 "use client";
 
-import { FormEvent, ReactNode, useRef, useState } from "react";
+import { FormEvent, ReactNode, useContext, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
-
-import { ACCESS_TOKEN_KEY } from "@/config";
 
 import ButtonComponent from "@/components/button/button.component";
 import InputComponent from "@/components/input/input.component";
@@ -16,6 +14,8 @@ import MingcuteEyeCloseLine from "@/icons/MingcuteEyeCloseLine";
 import MingcuteLockFill from "@/icons/MingcuteLockFill";
 import MingcuteUser3Fill from "@/icons/MingcuteUser3Fill";
 
+import { AuthTokenContext } from "@/providers/auth-token/auth-token.provider";
+
 import { fetchWithToast } from "@/utils/fetch.util";
 
 import styles from "@/app/auth/styles/auth-form.module.css";
@@ -24,6 +24,8 @@ export default function SignInFormComponent(): ReactNode {
   const router = useRouter();
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  const { setToken } = useContext(AuthTokenContext);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -48,11 +50,13 @@ export default function SignInFormComponent(): ReactNode {
         method: "POST",
         body: JSON.stringify(dto),
       },
+      null,
+      setToken,
       "خوش آمدید!",
     );
 
     if (result.data) {
-      localStorage.setItem(ACCESS_TOKEN_KEY, result.data);
+      setToken(result.data);
     }
 
     setLoading(false);
