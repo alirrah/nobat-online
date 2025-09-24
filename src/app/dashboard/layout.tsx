@@ -58,7 +58,7 @@ export default function Layout({
     };
 
     isAuthenticated().then();
-  }, []);
+  }, [router, setToken, token]);
 
   if (loading) return <Loading />;
 
