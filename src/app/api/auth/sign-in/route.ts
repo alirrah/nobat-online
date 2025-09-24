@@ -8,13 +8,14 @@ import { ApiResponseType } from "@/types/api-response.type";
 
 import {
   checkRequiredFields,
+  generateAccessToken,
   parseBody,
-  setAuthCookie,
+  setRefreshToken,
   wrapWithTryCatch,
 } from "@/utils/api.util";
 import { comparePassword } from "@/utils/bcrypt.util";
 
-export async function POST(request: Request): Promise<ApiResponseType<null>> {
+export async function POST(request: Request): Promise<ApiResponseType<string>> {
   return wrapWithTryCatch(async () => {
     const [parseError, body] = await parseBody<SignInDto>(request);
 
@@ -49,8 +50,11 @@ export async function POST(request: Request): Promise<ApiResponseType<null>> {
       );
     }
 
-    await setAuthCookie(foundUser.id);
+    await setRefreshToken(foundUser.id);
 
-    return NextResponse.json({ data: null }, { status: 200 });
+    return NextResponse.json(
+      { data: await generateAccessToken(foundUser.id) },
+      { status: 200 },
+    );
   });
 }

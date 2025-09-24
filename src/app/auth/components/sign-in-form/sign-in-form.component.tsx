@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, ReactNode, useRef, useState } from "react";
+import { FormEvent, ReactNode, useContext, useRef, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -14,6 +14,8 @@ import MingcuteEyeCloseLine from "@/icons/MingcuteEyeCloseLine";
 import MingcuteLockFill from "@/icons/MingcuteLockFill";
 import MingcuteUser3Fill from "@/icons/MingcuteUser3Fill";
 
+import { AuthTokenContext } from "@/providers/auth-token/auth-token.provider";
+
 import { fetchWithToast } from "@/utils/fetch.util";
 
 import styles from "@/app/auth/styles/auth-form.module.css";
@@ -22,6 +24,8 @@ export default function SignInFormComponent(): ReactNode {
   const router = useRouter();
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  const { setToken } = useContext(AuthTokenContext);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -40,14 +44,20 @@ export default function SignInFormComponent(): ReactNode {
       password: formData.get("password") as string,
     };
 
-    const result = await fetchWithToast<null>(
+    const result = await fetchWithToast<string>(
       "/api/auth/sign-in",
       {
         method: "POST",
         body: JSON.stringify(dto),
       },
+      null,
+      setToken,
       "خوش آمدید!",
     );
+
+    if (result.data) {
+      setToken(result.data);
+    }
 
     setLoading(false);
 
